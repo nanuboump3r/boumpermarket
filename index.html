@@ -1,61 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Venta de beats</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Currículum Digital Vivo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0d1b2a, #1b263b);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .profile {
+      text-align: center;
+    }
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid #00b4d8;
+      margin-bottom: 15px;
+    }
+    .name {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+    .score {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #00f5d4;
+      margin-bottom: 25px;
+      transition: all 0.4s ease;
+    }
+    .platforms {
+      display: flex;
+      gap: 20px;
+    }
+    .platform {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px 25px;
+      border-radius: 12px;
+      text-align: center;
+      min-width: 100px;
+      transition: all 0.4s ease;
+    }
+    .platform h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+    .platform .value {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+    .up { color: #06d6a0; }
+    .down { color: #ef476f; }
+  </style>
 </head>
 <body>
-    <header class="header">
-        <h1 class="title">X_X</h1>
-        
-    </header>
+  <div class="profile">
+    <img src="https://via.placeholder.com/120" alt="Avatar" class="avatar">
+    <div class="name">Tu Nombre</div>
+    <div class="score" id="globalScore">0.0%</div>
 
-    <main class="main">
-        <section class="beats-section">
+    <div class="platforms">
+      <div class="platform" id="instagram">
+        <h3>Instagram</h3>
+        <div class="value">0%</div>
+      </div>
+      <div class="platform" id="youtube">
+        <h3>YouTube</h3>
+        <div class="value">0%</div>
+      </div>
+      <div class="platform" id="tiktok">
+        <h3>TikTok</h3>
+        <div class="value">0%</div>
+      </div>
+      <div class="platform" id="twitter">
+        <h3>Twitter</h3>
+        <div class="value">0%</div>
+      </div>
+    </div>
+  </div>
 
-        <div class="beat-item">
-            <h2>Beat #1</h2>
-            <p class="description">Trap Intenso</p>
-            <button class="play-button" data-audio="beat1">▶</button>
-            <button class="buy-button" data-payment="mercado-pago"> Comprar en Mercado Pago</button>
-            <button class="buy-button" data-payment="Paypal"> Comprar en Paypal</button>
-            <audio id="beat1" src="beat1.mp3"></audio>
+  <script>
+    function randomFluctuation(base, range=5) {
+      let change = (Math.random() * range * 2 - range);
+      let value = base + change;
+      return Math.max(0, Math.min(100, value)); // 0–100%
+    }
 
+    let scores = {
+      global: 80,
+      instagram: 85,
+      youtube: 75,
+      tiktok: 60,
+      twitter: 50
+    };
 
+    function updateScores() {
+      // fluctuar valores
+      scores.global = randomFluctuation(scores.global, 2);
+      scores.instagram = randomFluctuation(scores.instagram, 3);
+      scores.youtube = randomFluctuation(scores.youtube, 3);
+      scores.tiktok = randomFluctuation(scores.tiktok, 4);
+      scores.twitter = randomFluctuation(scores.twitter, 4);
 
-        </div>
+      // actualizar UI
+      document.getElementById("globalScore").textContent = scores.global.toFixed(1) + "%";
 
-        <div class="beat-item">
-            <h2>Beat #2</h2>
-            <p class="description">Sample clasico Hip-hop</p>
-            <button class="play-button" data-audio="beat2">▶</button>
-            <button class="buy-button" data-payment="mercado-pago"> Comprar en Mercado Pago</button>
-            <button class="buy-button" data-payment="Paypal"> Comprar en Paypal</button>
-            <audio id="beat2" src="beat2.mp3"></audio>
+      for (let platform in scores) {
+        if (platform === "global") continue;
+        const el = document.querySelector(`#${platform} .value`);
+        const oldVal = parseFloat(el.textContent) || 0;
+        const newVal = scores[platform].toFixed(1);
 
+        el.textContent = newVal + "%";
+        el.className = "value " + (newVal >= oldVal ? "up" : "down");
+      }
+    }
 
-
-        </div>
-
-        <div class="beat-item">
-            <h2>Beat #3</h2>
-            <p class="description">Electronica Experimental</p>
-            <button class="play-button" data-audio="beat3">▶</button>
-            <button class="buy-button" data-payment="mercado-pago"> Comprar en Mercado Pago</button>
-            <button class="buy-button" data-payment="Paypal"> Comprar en Paypal</button>
-            <audio id="beat3" src="beat3.mp3"></audio>
-
-
-
-        </div>
-    </section>
-    </main>
-
-    <footer class="footer">
-        <p>© 2024 Boumper X. Todos los derechos reservados.</p>
-    </footer>
-    <script src="script.js"></script>
+    // refrescar cada 2 segundos
+    setInterval(updateScores, 2000);
+    updateScores();
+  </script>
 </body>
 </html>
