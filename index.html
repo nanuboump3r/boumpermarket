@@ -2,130 +2,155 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Currículum Digital Vivo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boumper X – Hacker Portfolio</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0d1b2a, #1b263b);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      font-family: monospace;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
     }
-    .profile {
+
+    header {
       text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(90deg, #ff0040, #00ffe5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.5rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 20px #ff0040;
     }
-    .avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 3px solid #00b4d8;
-      margin-bottom: 15px;
-    }
-    .name {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-    }
-    .score {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #00f5d4;
-      margin-bottom: 25px;
-      transition: all 0.4s ease;
-    }
-    .platforms {
-      display: flex;
-      gap: 20px;
-    }
-    .platform {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px 25px;
-      border-radius: 12px;
+
+    nav {
       text-align: center;
-      min-width: 100px;
-      transition: all 0.4s ease;
+      margin-bottom: 40px;
     }
-    .platform h3 {
-      margin: 0 0 8px;
-      font-size: 1rem;
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.1rem;
+      position: relative;
     }
-    .platform .value {
-      font-size: 1.4rem;
-      font-weight: bold;
+
+    nav a::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #ff0040;
+      transition: width 0.3s;
+      margin: 0 auto;
     }
-    .up { color: #06d6a0; }
-    .down { color: #ef476f; }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #ff0040;
+      text-shadow: 0 0 10px #ff0040;
+    }
+
+    .service {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 3px solid #ff0040;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .service:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #ff0040;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: #111;
+      color: #888;
+      font-size: 0.9rem;
+    }
+
+    /* Glitch effect */
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px #ff0040; }
+      25% { text-shadow: -2px -2px #00ffe5; }
+      50% { text-shadow: 2px -2px #ff0040; }
+      75% { text-shadow: -2px 2px #00ffe5; }
+      100% { text-shadow: 2px 2px #ff0040; }
+    }
+
+    .glitch {
+      animation: glitch 1s infinite;
+    }
   </style>
 </head>
 <body>
-  <div class="profile">
-    <img src="https://via.placeholder.com/120" alt="Avatar" class="avatar">
-    <div class="name">Tu Nombre</div>
-    <div class="score" id="globalScore">0.0%</div>
+  <header class="glitch">BOUMPER X – Hacker Musical & Digital Creator</header>
+  
+  <nav>
+    <a href="#musica">Música</a>
+    <a href="#apps">Apps</a>
+    <a href="#automatizacion">Automatización</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 
-    <div class="platforms">
-      <div class="platform" id="instagram">
-        <h3>Instagram</h3>
-        <div class="value">0%</div>
-      </div>
-      <div class="platform" id="youtube">
-        <h3>YouTube</h3>
-        <div class="value">0%</div>
-      </div>
-      <div class="platform" id="tiktok">
-        <h3>TikTok</h3>
-        <div class="value">0%</div>
-      </div>
-      <div class="platform" id="twitter">
-        <h3>Twitter</h3>
-        <div class="value">0%</div>
-      </div>
+  <section id="musica">
+    <h2>🎶 Producción Musical Premium</h2>
+    <div class="service">
+      <h3>Beat Hacker Exclusivo</h3>
+      <p>Beats únicos con mezcla/master + portada glitch + contrato de exclusividad.</p>
+      <p><strong>Precio:</strong> USD 300 – 1000</p>
     </div>
-  </div>
+    <div class="service">
+      <h3>Sound Design</h3>
+      <p>Diseño de sonidos para videojuegos, cine y experiencias digitales.</p>
+      <p><strong>Precio:</strong> desde USD 500</p>
+    </div>
+  </section>
 
-  <script>
-    function randomFluctuation(base, range=5) {
-      let change = (Math.random() * range * 2 - range);
-      let value = base + change;
-      return Math.max(0, Math.min(100, value)); // 0–100%
-    }
+  <section id="apps">
+    <h2>💻 Apps & Juegos Hacker</h2>
+    <div class="service">
+      <h3>Web/App Interactiva</h3>
+      <p>Plataformas minimalistas con estética hacker + reproductor musical.</p>
+      <p><strong>Precio:</strong> USD 1000 – 3000</p>
+    </div>
+  </section>
 
-    let scores = {
-      global: 80,
-      instagram: 85,
-      youtube: 75,
-      tiktok: 60,
-      twitter: 50
-    };
+  <section id="automatizacion">
+    <h2>🤖 Automatización Hacker</h2>
+    <div class="service">
+      <h3>Bots para Artistas</h3>
+      <p>Bots en Telegram/IG + reportes automáticos de métricas Spotify/YouTube.</p>
+      <p><strong>Precio:</strong> USD 1500 – 4000</p>
+    </div>
+  </section>
 
-    function updateScores() {
-      // fluctuar valores
-      scores.global = randomFluctuation(scores.global, 2);
-      scores.instagram = randomFluctuation(scores.instagram, 3);
-      scores.youtube = randomFluctuation(scores.youtube, 3);
-      scores.tiktok = randomFluctuation(scores.tiktok, 4);
-      scores.twitter = randomFluctuation(scores.twitter, 4);
+  <section id="contacto">
+    <h2>📩 Contacto</h2>
+    <p>Si querés trabajar conmigo, escribime:</p>
+    <p><strong>Email:</strong> contacto@boumperx.com</p>
+    <p><strong>Telegram:</strong> @BoumperX</p>
+  </section>
 
-      // actualizar UI
-      document.getElementById("globalScore").textContent = scores.global.toFixed(1) + "%";
-
-      for (let platform in scores) {
-        if (platform === "global") continue;
-        const el = document.querySelector(`#${platform} .value`);
-        const oldVal = parseFloat(el.textContent) || 0;
-        const newVal = scores[platform].toFixed(1);
-
-        el.textContent = newVal + "%";
-        el.className = "value " + (newVal >= oldVal ? "up" : "down");
-      }
-    }
-
-    // refrescar cada 2 segundos
-    setInterval(updateScores, 2000);
-    updateScores();
-  </script>
+  <footer>
+    © 2025 Boumper X – Hacker Portfolio. Todos los derechos reservados.
+  </footer>
 </body>
 </html>
